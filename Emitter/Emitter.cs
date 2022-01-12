@@ -206,9 +206,14 @@ namespace Emitter
             bool websocket = false, string username = null, int autoReconnectSeconds = 2, IMqttNetLogger logger = null)
         {
             if (broker == null)
+            {
                 broker = "api.emitter.io";
-            if (brokerPort == null)
+            }
+
+            if (!brokerPort.HasValue || brokerPort.Value <= 0)
+            {
                 brokerPort = secure ? 443 : 8080;
+            }
 
             DefaultKey = defaultKey;
 
